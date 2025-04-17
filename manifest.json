@@ -1,28 +1,19 @@
 {
-  "manifest_version": 2,
-  "name": "FB Auto Message Sender",
-  "description": "Automatically send messages on Facebook Messenger.",
+  "manifest_version": 3,
+  "name": "PF Auto Typer for FB Messenger",
   "version": "1.0",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "content_scripts": [
-    {
-      "matches": ["https://www.facebook.com/messages/*"],
-      "js": ["content.js"]
-    }
-  ],
-  "browser_action": {
+  "description": "Auto-send messages on Facebook Messenger via browser extension UI.",
+  "permissions": ["storage", "tabs", "scripting"],
+  "host_permissions": ["https://www.facebook.com/*"],
+  "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
+  },
+  "background": {
+    "service_worker": "background.js"
   }
 }
