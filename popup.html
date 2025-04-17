@@ -1,13 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Pf Auto Typer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FB Auto Message Sender</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      width: 250px;
+    }
+    input, button {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Auto Messenger</h1>
-  <input type="text" id="message" placeholder="Enter message">
-  <button id="save">Save Message</button>
+  <h3>Auto Sender</h3>
+  <label for="uid">UID:</label>
+  <input type="text" id="uid" placeholder="Enter recipient UID" />
 
-  <script src="popup.js"></script>
+  <label for="senderName">Sender Name:</label>
+  <input type="text" id="senderName" placeholder="Enter sender name" />
+
+  <label for="message">Message:</label>
+  <input type="text" id="message" placeholder="Enter message" />
+
+  <label for="delay">Delay (seconds):</label>
+  <input type="number" id="delay" placeholder="Enter delay in seconds" />
+
+  <button id="startButton">Start Sending</button>
+  <button id="stopButton">Stop Sending</button>
+
+  <script>
+    document.getElementById('startButton').addEventListener('click', () => {
+      const uid = document.getElementById('uid').value;
+      const senderName = document.getElementById('senderName').value;
+      const message = document.getElementById('message').value;
+      const delay = parseInt(document.getElementById('delay').value);
+
+      chrome.runtime.sendMessage({
+        action: 'startSending',
+        uid: uid,
+        senderName: senderName,
+        message: message,
+        delay: delay
+      });
+    });
+
+    document.getElementById('stopButton').addEventListener('click', () => {
+      chrome.runtime.sendMessage({ action: 'stopSending' });
+    });
+  </script>
 </body>
 </html>
