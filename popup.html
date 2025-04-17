@@ -1,58 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FB Auto Message Sender</title>
+  <meta charset="UTF-8" />
+  <title>PF Auto Typer</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 10px;
-      width: 250px;
-    }
-    input, button {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0;
-    }
+    body { font-family: Arial, sans-serif; padding: 10px; width: 250px; }
+    label { display: block; margin-top: 8px; }
+    input, button { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box; }
   </style>
 </head>
 <body>
-  <h3>Auto Sender</h3>
-  <label for="uid">UID:</label>
-  <input type="text" id="uid" placeholder="Enter recipient UID" />
-
-  <label for="senderName">Sender Name:</label>
-  <input type="text" id="senderName" placeholder="Enter sender name" />
-
-  <label for="message">Message:</label>
-  <input type="text" id="message" placeholder="Enter message" />
-
-  <label for="delay">Delay (seconds):</label>
-  <input type="number" id="delay" placeholder="Enter delay in seconds" />
-
-  <button id="startButton">Start Sending</button>
-  <button id="stopButton">Stop Sending</button>
-
-  <script>
-    document.getElementById('startButton').addEventListener('click', () => {
-      const uid = document.getElementById('uid').value;
-      const senderName = document.getElementById('senderName').value;
-      const message = document.getElementById('message').value;
-      const delay = parseInt(document.getElementById('delay').value);
-
-      chrome.runtime.sendMessage({
-        action: 'startSending',
-        uid: uid,
-        senderName: senderName,
-        message: message,
-        delay: delay
-      });
-    });
-
-    document.getElementById('stopButton').addEventListener('click', () => {
-      chrome.runtime.sendMessage({ action: 'stopSending' });
-    });
-  </script>
+  <h3>PF Auto Typer</h3>
+  <label>Friend UID:</label>
+  <input type="text" id="uid" placeholder="e.g. 1234567890" />
+  <label>Sender Name:</label>
+  <input type="text" id="senderName" placeholder="Your Name" />
+  <label>Interval (sec):</label>
+  <input type="number" id="interval" value="5" min="1" />
+  <label>Load Message File (.txt):</label>
+  <input type="file" id="fileInput" accept=".txt" />
+  <button id="startBtn">Start Sending</button>
+  <button id="stopBtn">Stop Sending</button>
+  <script src="popup.js"></script>
 </body>
 </html>
